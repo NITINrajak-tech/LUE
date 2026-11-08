@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101712">
+    <meta
+      name="description"
+      content="LUE is a private, in-browser password strength analyzer and secure password generator."
+    >
+    <title>LUE — Password Strength Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="LUE home">
+          <span class="brand-mark" aria-hidden="true">L</span>
+          <span>LUE</span>
+        </a>
+        <span class="privacy-pill"><span aria-hidden="true"></span> Private by design</span>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">PASSWORD SECURITY, MADE SIMPLE</p>
+        <h1 id="page-title">Make your next<br><span>password stronger.</span></h1>
+        <p class="intro-copy">
+          Check a password, understand what makes it strong, and generate a better one.
+          Everything happens right here in your browser.
+        </p>
+      </section>
+
+      <section class="analyzer panel" aria-labelledby="analyzer-title">
+        <div class="section-heading">
+          <div>
+            <p class="step-label">01 / CHECK</p>
+            <h2 id="analyzer-title">Test a password</h2>
+          </div>
+          <span class="local-tag"><span aria-hidden="true">●</span> Analyzed locally</span>
+        </div>
+
+        <label class="field-label" for="password-input">Your password</label>
+        <div class="password-field">
+          <input
+            id="password-input"
+            type="password"
+            autocomplete="new-password"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="Type a password to check"
+            aria-describedby="privacy-note"
+          >
+          <button class="text-button" id="toggle-visibility" type="button" aria-pressed="false">
+            Show
+          </button>
+        </div>
+        <p class="privacy-note" id="privacy-note">
+          Don’t enter a password you currently use. LUE never saves or sends it.
+        </p>
+
+        <div class="strength-block" aria-live="polite">
+          <div class="strength-topline">
+            <span>Strength</span>
+            <strong id="strength-label">Waiting for password</strong>
+          </div>
+          <div
+            class="meter-track"
+            id="strength-meter"
+            role="progressbar"
+            aria-label="Password strength"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <span id="meter-fill"></span>
+          </div>
+          <p class="score-caption" id="score-caption">Your score is based on length, variety, and patterns.</p>
+        </div>
+
+        <div class="checks-heading">
+          <h3>Strength checklist</h3>
+          <span id="check-count">0 of 7</span>
+        </div>
+        <ul class="check-list" id="check-list">
+          <li data-check="length"><span class="check-icon" aria-hidden="true">–</span><span>At least 12 characters</span></li>
+          <li data-check="long"><span class="check-icon" aria-hidden="true">–</span><span>16+ characters is even better</span></li>
+          <li data-check="variety"><span class="check-icon" aria-hidden="true">–</span><span>Mix of uppercase and lowercase</span></li>
+          <li data-check="number"><span class="check-icon" aria-hidden="true">–</span><span>Includes a number</span></li>
+          <li data-check="symbol"><span class="check-icon" aria-hidden="true">–</span><span>Includes a symbol</span></li>
+          <li data-check="unique"><span class="check-icon" aria-hidden="true">–</span><span>Uses a good mix of unique characters</span></li>
+          <li data-check="patterns"><span class="check-icon" aria-hidden="true">–</span><span>Avoids common or repeated patterns</span></li>
+        </ul>
+
+        <button class="primary-button" id="suggest-button" type="button">
+          <span aria-hidden="true">✦</span>           Generate strong passwords
+        </button>
+        <p class="error-message" id="error-message" role="alert" hidden></p>
+      </section>
+
+      <section class="suggestions panel" id="suggestions" aria-labelledby="suggestions-title" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="step-label">02 / IMPROVE</p>
+            <h2 id="suggestions-title">Try one of these</h2>
+          </div>
+          <span class="generated-tag">Generated on your device</span>
+        </div>
+        <p class="suggestions-copy">These random, 20-character options are made with your browser’s secure random generator.</p>
+        <ul class="suggestion-list" id="suggestion-list"></ul>
+        <button class="secondary-button" id="regenerate-button" type="button">
+          <span aria-hidden="true">↻</span> Generate new options
+        </button>
+      </section>
+
+      <aside class="learning-note">
+        <span class="learning-icon" aria-hidden="true">i</span>
+        <p>
+          <strong>A quick note on strength</strong>
+          Long, unique passwords are harder to guess. A password manager can create and remember a
+          different password for every account. This checker uses simple on-device heuristics; it
+          does not check breached-password databases.
+        </p>
+      </aside>
+
+      <footer>
+        <span>Made for learning password security.</span>
+        <span>LUE <span aria-hidden="true">·</span> Password Strength Analyzer</span>
+      </footer>
+    </main>
+  </body>
+</html>
