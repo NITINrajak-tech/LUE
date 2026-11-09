@@ -1,4 +1,4 @@
-# LUE — Password Strength Analyzer
+# LUE
 
 A small, dependency-free password strength analyzer and password generator built with HTML, CSS, and JavaScript.
 
